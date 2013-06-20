@@ -1,0 +1,13 @@
+# stupidly simple calculator
+function calc() {
+	echo "scale=4; $1" | bc
+}
+
+# shorten a URL with is.gd
+function short() {
+	if [ -z "${1}" ]; then
+		echo "Usage: \`short <url>\`"
+		return 1
+	fi
+	echo $(curl --silent "http://is.gd/create.php?format=simple&url=${1}")
+}

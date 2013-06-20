@@ -1,0 +1,12 @@
+# navigation
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias home="cd ~"
+
+# OS X
+alias finder="open ."
+alias update='sudo softwareupdate -i -a; brew update; brew upgrade; brew cleanup; sudo gem update'
+alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
+alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"

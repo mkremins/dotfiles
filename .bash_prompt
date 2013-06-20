@@ -1,0 +1,67 @@
+# -----------------------------------------------------------------------------
+# set up fancy colored prompt
+# note: these colors make no sense without Solarized color scheme installed
+# get it @ http://ethanschoonover.com/solarized
+# -----------------------------------------------------------------------------
+
+# actual color definitions
+blue='\[\033[0;34m\]'
+cyan='\[\033[0;36m\]'
+green='\[\033[0;32m\]'
+magenta='\[\033[0;35m\]'
+normal='\[\033[0m\]'
+orange='\[\033[1;31m\]'
+purple='\[\033[1;35m\]'
+red='\[\033[0;31m\]'
+yellow='\[\033[0;33m\]'
+gray='\[\033[1;32m\]'
+light_bg='\[\033[1;40m\]'
+
+# colors for specific parts of the prompt
+color_reset=$normal
+color_user_host=$blue
+color_working_dir=$cyan
+color_prompt=$magenta
+color_separator=$gray
+
+# text for specific parts of the prompt
+user_host="\n${color_user_host}max@home${color_reset}"
+working_dir="${color_working_dir}\w${color_reset}"
+prompt="\n${color_prompt}\$${color_reset} "
+separator="${color_separator}:${color_reset}"
+
+# extra git-specific info when you're in a git repo
+function git_info() {
+  color_git_clean=$green
+  color_git_staged=$yellow
+  color_git_unstaged=$orange
+
+  git_dir=`git rev-parse --git-dir 2>/dev/null`
+  if [ -z "$git_dir" ]; then
+    return 0
+  fi
+
+  git_head=`cat $git_dir/HEAD`
+  git_branch=${git_head##*/}
+  if [ ${#git_branch} -eq 40 ]; then
+    git_branch="(no branch)"
+  fi
+
+  git_status=`git status --porcelain`
+  if [ -z "$git_status" ]; then
+    color_git=$color_git_clean
+  else
+    echo -e "$git_status" | grep -q '^ [A-Z\?]'
+    if [ $? -eq 0 ]; then
+      color_git=$color_git_unstaged
+    else
+      color_git=$color_git_staged
+    fi
+  fi
+
+  echo "${separator}${color_git}${git_branch}${color_reset}"
+}
+
+# PS1 has to be assigned as part of PROMPT_COMMAND 
+# for the git_info() function to be actually re-evaluated when appropriate
+PROMPT_COMMAND='PS1="${user_host}${separator}${working_dir}$(git_info)${prompt}"'
