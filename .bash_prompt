@@ -30,7 +30,7 @@ color_git_staged=$yellow
 color_git_unstaged=$orange
 
 # text for specific parts of the prompt
-user_host="\n${color_user_host}max@home${color_reset}"
+user_host="\n${color_user_host}\u@\h${color_reset}"
 working_dir="${color_working_dir}\w${color_reset}"
 prompt="\n${color_prompt}\$${color_reset} "
 separator="${color_separator}:${color_reset}"
