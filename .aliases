@@ -1,3 +1,8 @@
+# scripts
+for script in ~/.scripts/*; do
+	alias $(basename $script)="source $script"
+done
+
 # navigation
 alias ..="cd .."
 alias ...="cd ../.."
