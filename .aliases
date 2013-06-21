@@ -5,6 +5,7 @@ alias sudo='sudo '
 for script in ~/.scripts/*; do
 	alias $(basename $script)="source $script"
 done
+unset script
 
 # navigation
 alias ..="cd .."
