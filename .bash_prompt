@@ -24,18 +24,20 @@ color_working_dir=$cyan
 color_prompt=$magenta
 color_separator=$gray
 
+# git_info() colors
+color_git_clean=$green
+color_git_staged=$yellow
+color_git_unstaged=$orange
+
 # text for specific parts of the prompt
 user_host="\n${color_user_host}max@home${color_reset}"
 working_dir="${color_working_dir}\w${color_reset}"
 prompt="\n${color_prompt}\$${color_reset} "
 separator="${color_separator}:${color_reset}"
 
-# extra git-specific info when you're in a git repo
+# display currently checked out branch name when you're in a git repo
+# color dependent upon changes status: none/staged/unstaged
 function git_info() {
-  color_git_clean=$green
-  color_git_staged=$yellow
-  color_git_unstaged=$orange
-
   git_dir=`git rev-parse --git-dir 2>/dev/null`
   if [ -z "$git_dir" ]; then
     return 0
