@@ -7,6 +7,7 @@
 path_components=(
   # Homebrew, etc
   /usr/local/{,s}bin
+  $(brew --prefix ruby)/bin
   # system
   /{,s}bin
   /usr/{,s}bin
