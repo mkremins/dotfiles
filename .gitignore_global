@@ -1,3 +1,10 @@
+# -------
+# Eclipse
+# -------
+
+.project
+.settings/
+
 # ----
 # OS X (see: github/gitignore/Global/OSX.gitignore)
 # ----
